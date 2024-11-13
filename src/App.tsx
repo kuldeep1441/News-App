@@ -1,15 +1,35 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './Pages/HomePage';
-import NewsDetailPage from './Pages/NewsDetailPage';
+import React, { useState } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-const App: React.FC = () => (
-  <Router>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/posts/:id" element={<NewsDetailPage />} />
-    </Routes>
-  </Router>
-);
+import Add from './Components/Add';
+import Home from './Components/Home';
+import { Post, PostContext } from './Components/Context';
+import PostPage from './Components/PostPage';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/add",
+    element: <Add />,
+  },
+  {
+    path: "/post/:id",
+    element: <PostPage />,
+  }
+]);
+
+const App: React.FC = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [addposts, setAddPosts] = useState<Post[]>([]);
+
+  return (
+    <PostContext.Provider value={{ posts, setPosts, addposts, setAddPosts }}>
+      <RouterProvider router={router} />
+    </PostContext.Provider>
+  );
+}
 
 export default App;
