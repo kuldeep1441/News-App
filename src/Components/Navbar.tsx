@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="w-1/3"></div>
         <div className="w-1/3 text-center">
-          <h1 className="text-black text-2xl font-bold">Posts</h1>
+          <h2 className="text-4xl font-extrabold text-gray-900 mb-8 text-center">Latest News</h2>
         </div>
         <div className="w-1/3 text-right">
           <Link to="/add">
